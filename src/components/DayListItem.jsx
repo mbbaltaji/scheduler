@@ -8,11 +8,25 @@ export default function DayListItem(props) {
     'day-list__item--selected' : props.selected, //styles selected day list item
     'day-list__item--full' : props.spots === 0  // styles unavailable day list item
   });
+
+  function formatSpots() {  
+
+    if (props.spots === 0) {
+      return <h3 className="text--light">no spots remaining</h3>;
+    } else if (props.spots === 1){
+      return <h3 className="text--light">1 spot remaining</h3>;
+    } else {
+      return <h3 className="text--light">{props.spots} spots remaining</h3> 
+    }
+    // props.spots === 0 && <h3 className="text--light">no spots remaining</h3>
+    // props.spots === 1 && <h3 className="text--light">1 spot remaining</h3>
+    // props.spots > 1 && <h3 className="text--light">{props.spots} spot remaining</h3>
+  }
   
   return (
     <li className={dayClass} onClick={() => props.setDay(props.name)}>
       <h2 className="text--regular">{props.name}</h2> 
-      <h3 className="text--light">{props.spots} spots remaining</h3>
+      {formatSpots()}
     </li>
   );
 }
