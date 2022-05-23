@@ -9,6 +9,7 @@ import Button from "components/Button";
 import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from 'components/InterviewerListItem'
+import InterviewerList from 'components/InterviewerList'
 
 
 storiesOf("Button", module)
@@ -132,6 +133,7 @@ storiesOf("Button", module)
         .add("Clickable", () => (
           <InterviewerList
             interviewers={interviewers}
-            setInterviewer={action("setInterviewer")}
+            //An argument can be passed to a function in Storybook by wrapping it in () after the name of the action
+            setInterviewer={() => action("setInterviewer")(interviewer.id)}
           />
         ));

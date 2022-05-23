@@ -15,7 +15,7 @@ function InterviewerListItem (props) {
       className="interviewers__item-image"
       src={props.avatar}
       alt={props.name}
-      onClick={() => props.setInterviewer(props.id)}
+      onClick={props.setInterviewer}
     />
       {props.selected && props.name}
     </li>
