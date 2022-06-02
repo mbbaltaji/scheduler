@@ -51,7 +51,7 @@ export default function Application(props) {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}
+    interviewers: []
   });
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
@@ -85,6 +85,7 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={state.interviewers}
       />
       );
   })
