@@ -45,8 +45,12 @@ import {getAppointmentsForDay, getInterview, getInterviewersForDay } from '../he
 //   }
 // };
 
+/**
+ * Renders the entire application
+ * @param {Object} props 
+ */
 export default function Application(props) {
-
+  
   const [state, setState] = useState({
     day: "Monday",
     days: [],

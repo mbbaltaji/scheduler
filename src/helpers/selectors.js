@@ -1,3 +1,9 @@
+
+/**
+ * @param {Object} state - the state of a component
+ * @param {String} day - the day of appointments needed
+ * @returns {Array} - Array of daily appointment objects 
+ */
 export function getAppointmentsForDay(state, day){
   
   if (!day) {
@@ -10,6 +16,7 @@ export function getAppointmentsForDay(state, day){
   if (!foundDayObj) {
     return [];
   }
+
   const foundAppointments = foundDayObj.appointments.map( id => {
     return state.appointments[id];
   });
@@ -17,6 +24,12 @@ export function getAppointmentsForDay(state, day){
   return foundAppointments;
 }
 
+
+/**
+ * @param {Object} state - the state of a component
+ * @param {String} day - the day of interviewers needed
+ * @returns {Array} - Array of daily interviewers objects 
+ */
 export function getInterviewersForDay(state, day){
   if (!day) {
     return [];
@@ -36,10 +49,18 @@ export function getInterviewersForDay(state, day){
   return foundInterviewers;
 }
 
+/**
+ * 
+ * @param {Object} state - the state of a component
+ * @param {Object} interview - Object that contains the student name and interviewer id
+ * @returns {Object} - interviewer data
+ */
 export function getInterview(state, interview ) {  
 
-  const interviewersObj = state.interviewers;
   let res = {};
+
+  const interviewersObj = state.interviewers;
+
 
   if (!interviewersObj || !interview) {
     return null;
