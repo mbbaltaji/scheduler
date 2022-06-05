@@ -7,15 +7,19 @@ import Show from 'components/Appointment/Show';
 import Empty from 'components/Appointment/Empty';
 import Form from 'components/Appointment/Form';
 import useVisualMode from '../../hooks/useVisualMode';
+import Status from './Status';
 
 // Different modes of Appointment component
 const EMPTY = "EMPTY";  
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
+
 
 /**
- * @param {Object} props - Data passed from Application component to be rendered
- * @returns {Object} - React Element that represents the Appointment component and its children
+ * @param {Object} props Data passed from Application component to be rendered
+ * @param {Number} props.id unique id for each appointment 
+ * @returns {Object} React Element that represents the Appointment component and its children
  */
 export default function Appointment (props) {
   
@@ -28,13 +32,32 @@ export default function Appointment (props) {
     props.interview ? SHOW : EMPTY
   )
   
+  //props
   const {
+    id,
     time, 
     interview, 
     student, 
-    interviewers
+    interviewers,
+    bookInterview
   } = props;
-  
+
+  /**
+  * Creates an interview a new object 
+  * @param {String} name - name of student 
+  * @param {String} interviewer - name of interviewer
+  */
+  const save = (name, interviewer) => {
+    const interview = {
+      student: name,
+      interviewer
+    };
+    console.log(interview);
+    transition(SAVING)
+    bookInterview(id, interview)
+    .then(() => { transition(SHOW)})
+  }
+
   return (
     <article className="appointment">
       <Header time={time}/>
@@ -46,12 +69,8 @@ export default function Appointment (props) {
       />
 )}
 
-      {mode === CREATE && 
-      <Form 
-        interviewers={interviewers}
-        onSave={() =>  console.log('hi')}
-        onCancel={() => back()}
-      /> }
+      {mode === CREATE && <Form interviewers={interviewers} onSave={save} onCancel={back}/> }
+      {mode === SAVING && <Status message="Saving"></Status>}
 
     </article>
   )

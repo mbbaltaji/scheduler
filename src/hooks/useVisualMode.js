@@ -9,7 +9,7 @@ export default function useVisualMode(initial){
   const [history, setHistory] = useState([initial]);
 
   // allows use to advance to any other mode
-  function transition(newMode, replace = false) {
+  const  transition = (newMode, replace = false)  => {
 
   if (replace) {
     setHistory(prev => {
