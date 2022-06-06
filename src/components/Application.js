@@ -90,6 +90,13 @@ export default function Application(props) {
     })
   }
 
+  const cancelInterview = id => {
+    return axios.delete(`api/appointments/${id}`)
+    .then( res => {
+      console.log('delete: ', res);
+    })
+  }
+
   // const setDays = days => setState(prev => ({...prev, days}));
 
 
@@ -121,6 +128,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
       );
   })
