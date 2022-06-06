@@ -11,10 +11,10 @@ import Button from 'components/Button'
  */
 export default function Form(props) {
 
-  const {onSave, onCancel, interviewers} = props;
+  const {name, onSave, onCancel, interviewers, interviewer} = props;
 
-  const [student, setStudent] = useState(props.student || '');
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [student, setStudent] = useState(name || '');
+  const [formInterviewer, setInterviewer] = useState(interviewer || null);
 
   const handleCancel = function() {
     setStudent('');
@@ -28,11 +28,11 @@ export default function Form(props) {
       return;
     }
 
-    if (!interviewer) {
+    if (!formInterviewer) {
       alert('Please select an interviewer');
       return;
     }
-    onSave(student,interviewer);
+    onSave(student,formInterviewer);
   }
 
   return (
@@ -50,7 +50,7 @@ export default function Form(props) {
         </form>
         <InterviewerList 
           interviewers={interviewers}
-          value={interviewer}
+          value={formInterviewer}
           onChange={setInterviewer}
         />
       </section>
