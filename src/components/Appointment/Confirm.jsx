@@ -1,6 +1,13 @@
 import React from 'react';
 import Button from 'components/Button'
 
+
+/**
+ * @param {String} message - message to be displayed when use wants to cancel interview
+ * @param {function} onCancel - when user cancels deletion of interview.
+ * @param {function} onConfirm - when user clicks confirm after deleting an interview.
+ * @returns {Object} Confirm component that is rendered when user wants to delete an interview
+ */
 export default function Confirm(props) {  
   const { onCancel, onConfirm, message} = props;
   return (

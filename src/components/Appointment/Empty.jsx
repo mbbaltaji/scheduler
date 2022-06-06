@@ -1,5 +1,11 @@
 import React from 'react'
 
+
+/**
+ * 
+ * @param {*} props 
+ * @returns {Object} - JSX element rendered when an interview can be booked
+ */
 export default function Empty (props) {
   return (
     <main className="appointment__add">

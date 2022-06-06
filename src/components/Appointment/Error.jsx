@@ -1,5 +1,9 @@
 import React from 'react'
 
+/**
+ * @param {*} props 
+ * @returns {object} - JSX element rendered when user cannot delete appointment
+ */
 export default function Error (props) {
   return (
     <main className="appointment__card appointment__card--error">

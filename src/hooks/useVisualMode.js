@@ -1,5 +1,11 @@
 import { useState } from 'react';
 
+
+/**
+ * 
+ * @param {String} initial - initial state of a component
+ * @returns new mode and a transition and back functions
+ */
 export default function useVisualMode(initial){
   
   // keeps track of each mode (EMPTY, SHOW, CREATE/EDIT, SAVING/DELETING, CONFIRM)
@@ -36,8 +42,6 @@ export default function useVisualMode(initial){
 
   }
   return { mode, transition, back};
-
- 
 }
 
 

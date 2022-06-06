@@ -25,16 +25,7 @@ const CONFIRM = "CONFIRM";
  * @returns {Object} React Element that represents the Appointment component and its children
  */
 export default function Appointment (props) {
-  
-  /**
-   * Functions to control different modes of Appointment component.
-   * These functions render the children of Appointment component 
-   * based on the value of mode
-   */ 
-  const { mode, transition, back} = useVisualMode (
-    props.interview ? SHOW : EMPTY
-  )
-  
+
   //props
   const {
     id,
@@ -45,6 +36,16 @@ export default function Appointment (props) {
     bookInterview,
     cancelInterview
   } = props;
+  
+  /**
+   * Functions to control different modes of Appointment component.
+   * These functions render the children of Appointment component 
+   * based on the value of mode
+   */ 
+  const { mode, transition, back} = useVisualMode (
+    props.interview ? SHOW : EMPTY
+  )
+  
 
   /**
   * Creates an interview a new object 
@@ -56,14 +57,14 @@ export default function Appointment (props) {
       student: name,
       interviewer
     };
-    console.log(interview);
+    // create a new interview object then render the Show component
     transition(SAVING)
     bookInterview(id, interview)
     .then(() => { transition(SHOW)})
   }
 
+  // function called when user wants to cancel or remove an interview
   const remove = () => {
-    
     if (mode === SHOW) {
       transition(CONFIRM)
     } else{
@@ -81,23 +82,23 @@ export default function Appointment (props) {
         {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
         {mode === SHOW && (
       <Show
-      student={props.interview.student}
-      interviewer={props.interview.interviewer}
-      onDelete={remove}
+        student={props.interview.student}
+        interviewer={props.interview.interviewer}
+        onDelete={remove}
+        
       />
 )}
 
-      {mode === CREATE && <Form interviewers={interviewers} onSave={save} onCancel={back}/> }
-      {mode === SAVING && <Status message="Saving"></Status>}
-      {mode === DELETING && <Status message="Deleting" />}
-      {mode === CONFIRM && (
-        <Confirm  
-          message="Are you sure you want to cancel this appointment?"
-          onCancel={back}
-          onConfirm={remove}
-        />
-          )}
-
+    {mode === CREATE && <Form interviewers={interviewers} onSave={save} onCancel={back}/> }
+    {mode === SAVING && <Status message="Saving"></Status>}
+    {mode === DELETING && <Status message="Deleting" />}
+    {mode === CONFIRM && (
+      <Confirm  
+        message="Are you sure you want to cancel this appointment?"
+        onCancel={back}
+        onConfirm={remove}
+      />
+        )}
     </article>
   )
 }

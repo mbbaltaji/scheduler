@@ -2,6 +2,13 @@ import React, {useState} from 'react'
 import InterviewerList from 'components/InterviewerList'
 import Button from 'components/Button'
 
+
+/**
+ * 
+ * @param {Function} onCancel - when user wants to cancel creation of new appointment
+ * @param {Function} onSave - handles save event. when user wants to confirm creation of new appointment
+ * @returns {Object} JSX element that renders when user clicks add interview button
+ */
 export default function Form(props) {
 
   const {onSave, onCancel, interviewers} = props;

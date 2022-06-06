@@ -1,5 +1,13 @@
 import React from 'react';
 
+/**
+ * 
+ * @param {String} student - student name
+ * @param {Object} interviewer 
+ * @param {Function} onEdit - handles edit event of an interview
+ * @param {Function} onDelete - handles deletion of an interview
+ * @returns {Object} - Show component - rendered after user books an interview
+ */
 export default function Show (props) {
   const {student, interviewer, onEdit, onDelete} = props;
   return (
