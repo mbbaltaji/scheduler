@@ -15,7 +15,6 @@ export default function Form(props) {
 
   const [student, setStudent] = useState(name || '');
   const [formInterviewer, setInterviewer] = useState(interviewer || null);
-
   const handleCancel = function() {
     setStudent('');
     setInterviewer(null);
@@ -23,15 +22,15 @@ export default function Form(props) {
   }
 
   const handleSave = function() {
-    if (!student) {
-      alert('Please enter student name');
-      return;
-    }
+    // if (!student) {
+    //   alert('Please enter student name');
+    //   return;
+    // }
 
-    if (!formInterviewer) {
-      alert('Please select an interviewer');
-      return;
-    }
+    // if (!formInterviewer) {
+    //   alert('Please select an interviewer');
+    //   return;
+    // }
     onSave(student,formInterviewer);
   }
 

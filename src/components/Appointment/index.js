@@ -6,6 +6,7 @@ import Header from 'components/Appointment/Header';
 import Show from 'components/Appointment/Show';
 import Empty from 'components/Appointment/Empty';
 import Form from 'components/Appointment/Form';
+import Error from 'components/Appointment/Error';
 import useVisualMode from '../../hooks/useVisualMode';
 import Status from './Status';
 import Confirm from './Confirm';
@@ -18,6 +19,9 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
+
 
 
 /**
@@ -54,25 +58,37 @@ export default function Appointment (props) {
   * @param {String} interviewer - name of interviewer
   */
   const save = (name, interviewer) => {
+    if (!interviewer) {
+      transition(ERROR_SAVE, true);
+    } else {
     const interview = {
       student: name,
       interviewer
     };
     // create a new interview object then render the Show component
-    transition(SAVING)
+    transition(SAVING);
     bookInterview(id, interview)
     .then(() => { transition(SHOW)})
+    .catch(error => {
+      console.log('Error saving', error);
+      transition(ERROR_SAVE, true);
+    })
   }
+  };
 
   // function called when user wants to cancel or remove an interview
   const remove = () => {
     if (mode === SHOW) {
       transition(CONFIRM)
     } else{
-      transition(DELETING)
+      transition(DELETING, true)
       cancelInterview(id)
       .then(() => {
       transition(EMPTY);
+      })
+      .catch( error => {
+        console.log('Deleting Error: ', error);
+        transition(ERROR_DELETE, true);
       })
     }
   }
@@ -113,7 +129,9 @@ export default function Appointment (props) {
         interviewers={interviewers}
 
       />  
-    )}    
+    )}
+    {mode === ERROR_SAVE && (<Error message="Please select an interviewer" onClose={back} />)}
+    {mode === ERROR_DELETE && (<Error message="Could not cancel appointment" onClose={back} />)}
     </article>
   )
 }
