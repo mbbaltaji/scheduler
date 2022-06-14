@@ -28,10 +28,10 @@ export default function Form(props) {
       return;
     }
 
-    if(!formInterviewer) {
-      setError("Please select an interviewer");
-      return;
-    }
+    // if(!formInterviewer) {
+    //   setError("Please select an interviewer");
+    //   return;
+    // }
 
     setError("");
     onSave(studentName, formInterviewer);

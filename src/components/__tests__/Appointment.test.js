@@ -14,7 +14,7 @@ import { render } from "@testing-library/react";
 */
 import Appointment from "components/Appointment";
 
-afterEach(cleanup);
+//afterEach(cleanup);
 describe('Appointment', () => { 
   /*
   A test that renders a React Component
