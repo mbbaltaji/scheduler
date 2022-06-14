@@ -42,7 +42,7 @@ const setDay = day => setState({...state, day});
 
 
 const cancelInterview = id => {
-  return axios.delete(`api/appointments/${id}`)
+  return axios.delete(`/api/appointments/${id}`)
   .then( res => {
     console.log('delete: ', res);
   })
@@ -50,9 +50,9 @@ const cancelInterview = id => {
 
 useEffect(()=> {
   // API GET REQUESTS 
-  let days = axios.get(`http://localhost:8001/api/days`);
-  let appointments = axios.get(`http://localhost:8001/api/appointments`);
-  let interviewers = axios.get(`http://localhost:8001/api/interviewers`);
+  let days = axios.get(`/api/days`);
+  let appointments = axios.get(`/api/appointments`);
+  let interviewers = axios.get(`/api/interviewers`);
 
   Promise.all([days, appointments, interviewers]).then( res => {
     console.log('res', res);
