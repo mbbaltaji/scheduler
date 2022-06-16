@@ -58,6 +58,7 @@ export default function Appointment (props) {
   * @param {String} interviewer - name of interviewer
   */
   const save = (name, interviewer) => {
+    console.log({name, interviewer});
     if (!interviewer) {
       transition(ERROR_SAVE, true);
     } else {
@@ -123,7 +124,7 @@ export default function Appointment (props) {
     {mode === EDIT && (
       <Form
         name={interview.student}
-        interviewer={interview}
+        interviewer={interview.interviewer?.id}
         onCancel={back}
         onSave={save}
         interviewers={interviewers}
