@@ -3,6 +3,7 @@ import React from "react";
 import { render, cleanup, waitForElement, getByText, fireEvent, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, getByTestId, queryByAltText, queryByDisplayValue, getByDisplayValue} from "@testing-library/react";
 import Application from "components/Application";
 import axios from '__mocks__/axios';
+import { act } from "react-test-renderer";
 
 afterEach(cleanup);
 
@@ -18,7 +19,7 @@ describe('Application', () => {
   });
 
   it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
   
     await waitForElement(() => getByText(container, "Archie Cohen"));
   
@@ -26,11 +27,9 @@ describe('Application', () => {
     const appointment = appointments[0];
   
     fireEvent.click(getByAltText(appointment, "Add"));
-  
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
       target: { value: "Lydia Miller-Jones" }
     });
-  
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
     fireEvent.click(getByText(appointment, "Save"));
   
@@ -110,34 +109,42 @@ describe('Application', () => {
   
 
   it("shows the save error when failing to save an appointment", async () => {
+    axios.put.mockRejectedValueOnce();
 
     // 1. Render the Application 
     const { container, debug } = render(<Application />);
 
    // 2. Wait until the text "Archie Cohen" is displayed.
-    await waitForElement(() => getByText(container, "Lydia Miller-Jones"));
+    await waitForElement(() => getByText(container, "Archie Cohen"));
 
-  
-
-    const appointment = getAllByTestId(container, "appointment")[0];
+    const appointments = getAllByTestId(container, "appointment");
+    const appointment = appointments[0];
 
     fireEvent.click(getByAltText(appointment, "Add"));
 
-  
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+      target: { value: "Lydia Miller-Jones" }
+    });
 
-
-
-  
+    fireEvent.click(queryByText(appointment, "Save"));
+    expect(getByText(appointment, "Error")).toBeInTheDocument();
+    fireEvent.click(getByAltText(appointment, "Close"));
+    await waitForElement(() => getByAltText(appointment, "Add"));
   });
 
-  
+  it("shows the delete error when failing to delete an existing appointment", async () => {
+    const { container } = render(<Application />);
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+    const appointments = getAllByTestId(container, "appointment");
+    const appointment = appointments[1];
 
+    fireEvent.click(getByAltText(appointment, "Delete"));
 
- 
-
-
-
-  
-
-
-})
+    expect(
+      getByText(appointment, /Are you sure you want to cancel this appointment?/)
+    ).toBeInTheDocument();
+    act(() => fireEvent.click(getByText(appointment, "Confirm")));
+    expect(getByText(appointment, "Deleting")).toBeInTheDocument();
+    axios.delete.mockRejectedValueOnce();
+  });
+});

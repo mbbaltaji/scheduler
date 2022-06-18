@@ -82,11 +82,7 @@ export default {
     }
   }),
 
-  put: jest.fn((url, interview)  => {
-    const appointment = url[url.length - 1];
-    const interview_app = interview.interview;
-
-    fixtures.appointments[appointment].interview = interview_app;
+  put: jest.fn(()  => {
     return Promise.resolve(
       {
         state: 204,
