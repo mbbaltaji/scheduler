@@ -3,21 +3,32 @@ import classNames from 'classnames';
 
 import "components/Button.scss";
 
+/**
+ * 
+ * @param {*} props - Object containing properties of a button
+ * @returns different types of button
+ */
 export default function Button(props) {
-   console.log("props", props);
+   const {
+      onClick, 
+      disabled, 
+      confirm, 
+      danger, 
+      children
+   } = props;
 
    const buttonClass = classNames('button', {
-      'button--confirm': props.confirm,
-      'button--danger': props.danger
+      'button--confirm': confirm,
+      'button--danger': danger
    });
 
    return (
    <button 
-      onClick={props.onClick} 
-      disabled={props.disabled} 
+      onClick={onClick} 
+      disabled={disabled} 
       className={buttonClass}
    >
-      {props.children}
+      {children}
    </button>
    );
 }

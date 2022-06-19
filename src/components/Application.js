@@ -47,7 +47,10 @@ import useApplicationData from "hooks/useApplicationData";
 
 /**
  * Renders the entire application
- * @param {Object} props 
+ * @param {Object} props
+ * @param {Function} setDay - sets the day of the appointment
+ * @param {Function} bookInterview - books an interview for a given day
+ * @param {Function} cancelInterview - cancels interview 
  */
 export default function Application(props) {
   
@@ -62,7 +65,6 @@ export default function Application(props) {
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   
   const schedule = dailyAppointments.map((appointment) => {
-    // const interview = getInterview(state, appointment.interview);
     return(
       <Appointment
         key={appointment.id}

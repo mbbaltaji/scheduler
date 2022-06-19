@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-
 /**
  * 
  * @param {String} initial - initial state of a component

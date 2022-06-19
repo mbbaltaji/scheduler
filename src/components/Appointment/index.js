@@ -1,7 +1,5 @@
 import React, {Fragment} from 'react';
-
 import 'components/Appointment/styles.scss';
-
 import Header from 'components/Appointment/Header';
 import Show from 'components/Appointment/Show';
 import Empty from 'components/Appointment/Empty';
@@ -21,7 +19,6 @@ const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
-
 
 
 /**
@@ -58,7 +55,6 @@ export default function Appointment (props) {
   * @param {String} interviewer - name of interviewer
   */
   const save = (name, interviewer) => {
-    console.log({name, interviewer});
     if (!interviewer) {
       transition(ERROR_SAVE, true);
     } else {
@@ -114,6 +110,7 @@ export default function Appointment (props) {
     {mode === CREATE && <Form interviewers={interviewers} onSave={save} onCancel={back}/> }
     {mode === SAVING && <Status message="Saving"></Status>}
     {mode === DELETING && <Status message="Deleting" />}
+    
     {mode === CONFIRM && (
       <Confirm  
         message="Are you sure you want to cancel this appointment?"

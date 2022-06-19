@@ -3,9 +3,15 @@ import 'components/InterviewerList.scss';
 import InterviewerListItem from './InterviewerListItem';
 import PropTypes from 'prop-types';
 
+/**
+ * 
+ * @param {Function} onChange - function to be executed when user clicks on interviewer 
+ * @param {Number} value - interviewer id to be selected
+ * @param {Array} interviewers - list of all the interviewers 
+ * @returns JSX element that contains a list of all the interviewers
+ */
 export default function InterviewerList(props) {
   const {onChange, value, interviewers} = props;
-  console.log('here',props);
   
   const interviewerListItems = interviewers.map((interviewer) => {
     return(
