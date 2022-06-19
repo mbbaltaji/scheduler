@@ -17,7 +17,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
-
+app/.cache
 .vscode/
 
 npm-debug.log*
