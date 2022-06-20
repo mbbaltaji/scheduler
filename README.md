@@ -25,9 +25,9 @@ npm run storybook
 
 ## Final Product
 
-### home page
-!["home page"](docs/homepage.png)
-### booking an interview 
+### Home page
+  !["home page"](docs/homepage.png)
+### Booking an interview 
 !["book interview"](docs/book_interview.gif)
 ### Editing an interview
 !["Editing interview"](docs/editing_interview.gif)
